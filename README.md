@@ -1,8 +1,9 @@
-<br/>
-<br/>
-<p align="center">
-<img src = "![Image](https://github.com/user-attachments/assets/3a75762c-1fab-4fe4-9113-165f7b8d7405)" align="center" height="130">
+
+<p 
+  align="center">
+<img src = "https://github.com/user-attachments/assets/34874ba4-074e-47a9-9848-104f59a12337" align="center" height="350">
 </p>
+
 <h1 align="center">👋 Hey there! I'm Abhinav</h1>
 <p align="center">A passionate developer who enjoys building full-stack projects, Chrome extensions, and experimenting with modern web technologies.</p>
 <p align="center">🎓 CSE Undergrad @ NSUT | 🏙️ Delhi, India | 🧑‍💻 1st Year</p>
