@@ -2,7 +2,8 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:10002B,50:5A189A,100:240046&height=220&section=header&text=ABHINAV&fontSize=70&fontColor=E0AAFF&animation=fadeIn&fontAlignY=35&desc=Software%20Engineer%20%7C%20Full-Stack%20%26%20AI%2FML%20Enthusiast&descAlignY=55&descSize=18&descColor=C77DFF" width="100%"/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=1200&color=C77DFF&center=true&vCenter=true&width=700&lines=Building+scalable+full-stack+systems;Exploring+AI%2FML+%26+Explainable+Models;500%2B+DSA+Problems+Solved+%E2%80%94+and+counting;Open+to+SDE+Internships+2026" alt="Typing SVG" />
+<!-- <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=1200&color=C77DFF&center=true&vCenter=true&width=700&lines=Building+scalable+full-stack+systems;Exploring+AI%2FML+%26+Explainable+Models;500%2B+DSA+Problems+Solved+%E2%80%94+and+counting;Open+to+SDE+Internships+2026" alt="Typing SVG" /> -->
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=1200&color=C77DFF&center=true&vCenter=true&width=700&lines=Building+scalable+full-stack+systems;Exploring+AI%2FML+%26+Explainable+Models;500%2B+DSA+Problems+Solved+%E2%80%94+and+counting;Open+to+SDE+Internships+2026&v=1" alt="Typing SVG" />
 
 <br/>
 
@@ -136,8 +137,8 @@ I'm a Computer Science undergraduate at **NSUT, Delhi** (Class of 2028), heading
 
 <div align="center">
 
-<img src="https://github-profile-trophy.vercel.app/?username=abhinav-phi&theme=dracula&row=1&column=7&margin-w=8&margin-h=8"/>
-
+<!-- <img src="https://github-profile-trophy.vercel.app/?username=abhinav-phi&theme=dracula&row=1&column=7&margin-w=8&margin-h=8"/> -->
+<img src="https://github-profile-trophy.vercel.app/?username=abhinav-phi&theme=dracula&row=1&column=7&margin-w=8&margin-h=8&v=1"/>
 </div>
 
 <br/>
