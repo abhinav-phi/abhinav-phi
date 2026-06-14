@@ -18,7 +18,7 @@
 <br/>
 
 <h1 align="center">Hi, I'm Abhinav! 👋</h1>
-<h3 align="center">Software Engineer | Full-Stack & AI/ML Enthusiast</h3>
+<h3 align="center">3<sup>rd</sup> Yr UnderGrad | Full-Stack & AI/ML Enthusiast</h3>
 
 <br/>
 
