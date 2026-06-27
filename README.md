@@ -122,10 +122,10 @@ I'm a Computer Science undergraduate at **NSUT, Delhi** (Class of 2028), heading
 
 <div align="center">
 
-[![LeetCode](https://img.shields.io/badge/LeetCode-1600+-7B2CBF?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/u/abhinav-phi)
-[![Codeforces](https://img.shields.io/badge/Codeforces-Specialist-5A189A?style=for-the-badge&logo=codeforces&logoColor=white)](https://codeforces.com/profile/abhinav-phi)
-[![CodeChef](https://img.shields.io/badge/CodeChef-2_Star-3C096C?style=for-the-badge&logo=codechef&logoColor=white)](https://www.codechef.com/users/abhinav-phi)
-[![GeeksforGeeks](https://img.shields.io/badge/GFG-Profile-240046?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/user/abhinav-phi)
+[![LeetCode](https://img.shields.io/badge/LeetCode-1600+-7B2CBF?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/)
+[![Codeforces](https://img.shields.io/badge/Codeforces-Specialist-5A189A?style=for-the-badge&logo=codeforces&logoColor=white)](https://codeforces.com/)
+[![CodeChef](https://img.shields.io/badge/CodeChef-2_Star-3C096C?style=for-the-badge&logo=codechef&logoColor=white)](https://www.codechef.com/)
+[![GeeksforGeeks](https://img.shields.io/badge/GFG-Profile-240046?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/)
 
 </div>
 
