@@ -80,6 +80,8 @@ I'm a Computer Science undergraduate at **NSUT, Delhi** (Class of 2028), heading
 
 ## Tech Stack
 
+<div align="center">
+
 **Languages**
 
 <img src="https://skillicons.dev/icons?i=cpp,py,java,js,ts,go" />
@@ -96,6 +98,7 @@ I'm a Computer Science undergraduate at **NSUT, Delhi** (Class of 2028), heading
 
 <img src="https://skillicons.dev/icons?i=git,github,githubactions,vercel,postman,vscode" />
 
+</div>
 <br/>
 
 ---
@@ -139,10 +142,10 @@ I'm a Computer Science undergraduate at **NSUT, Delhi** (Class of 2028), heading
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=abhinav-phi&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=C77DFF&icon_color=9D4EDD&text_color=c9d1d9&include_all_commits=true&count_private=true" width="49%"/>
+<img src="https://github-readme-stats-abhinav.vercel.app/api?username=abhinav-phi&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=C77DFF&icon_color=9D4EDD&text_color=c9d1d9&include_all_commits=true&count_private=true" width="49%"/>
 <img src="https://nirzak-streak-stats.vercel.app/?user=abhinav-phi&theme=tokyonight&hide_border=true&background=0D1117&ring=9D4EDD&fire=C77DFF&currStreakLabel=C77DFF" width="49%"/>
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=abhinav-phi&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=C77DFF&text_color=c9d1d9&langs_count=8" width="49%"/>
+<img src="https://github-readme-stats-abhinav.vercel.app/api/top-langs/?username=abhinav-phi&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=C77DFF&text_color=c9d1d9&langs_count=8" width="49%"/>
 
 </div>
 
