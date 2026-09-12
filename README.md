@@ -1,36 +1,62 @@
-# GitHub Analytics
-
 <div align="center">
 
-<img src="abhinav-phi-gitfut.png" width="400" alt="GitFut card — Abhinav · 75 GOLD · Top 0.68% of GitHub" />
-
-<br/><br/>
-
-<img src="https://github-readme-stats-abhinav.vercel.app/api?username=abhinav-phi&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=C77DFF&icon_color=9D4EDD&text_color=c9d1d9&include_all_commits=true&count_private=true" width="49%" alt="GitHub stats" />
-<img src="https://nirzak-streak-stats.vercel.app/?user=abhinav-phi&theme=tokyonight&hide_border=true&background=0D1117&ring=9D4EDD&fire=C77DFF&currStreakLabel=C77DFF" width="49%" alt="GitHub streak" />
+<img src="logo_abhinav-phi-removebg-preview.png" width="110" alt="Abhinav logo" />
 
 <br/>
 
-<img src="https://github-readme-stats-abhinav.vercel.app/api/top-langs/?username=abhinav-phi&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=C77DFF&text_color=c9d1d9&langs_count=8" width="49%" alt="Top languages" />
+<h1 align="center">Hi, I'm Abhinav! 👋</h1>
+<h3 align="center">3<sup>rd</sup> yr UnderGrad | Full-Stack & AI/ML Enthusiast</h3>
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=1200&color=C77DFF&center=true&vCenter=true&width=700&lines=Building+full-stack+products+end-to-end;Making+ML+models+explain+themselves;197+PRs+across+open+source+%E2%80%94+and+counting;500%2B+DSA+problems+solved&v=3" alt="Typing SVG" />
+
+<br/>
+
+![Profile Views](https://komarev.com/ghpvc/?username=abhinav-phi&style=for-the-badge&color=9D4EDD&label=PROFILE+VIEWS)
+![Followers](https://img.shields.io/github/followers/abhinav-phi?style=for-the-badge&color=7B2CBF&label=FOLLOWERS&labelColor=240046)
+![Stars](https://img.shields.io/github/stars/abhinav-phi?style=for-the-badge&color=C77DFF&label=STARS&labelColor=240046)
 
 </div>
 
----
+## GitHub Analytics
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=cpp,py,java,js,ts,go" />
+<table>
+  <tr>
+    <td width="58%" valign="top">
+      <img src="https://github-readme-stats-abhinav.vercel.app/api?username=abhinav-phi&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=C77DFF&icon_color=9D4EDD&text_color=c9d1d9&include_all_commits=true&count_private=true" width="100%" alt="GitHub stats" />
+      <br/>
+      <img src="https://nirzak-streak-stats.vercel.app/?user=abhinav-phi&theme=tokyonight&hide_border=true&background=0D1117&ring=9D4EDD&fire=C77DFF&currStreakLabel=C77DFF" width="100%" alt="GitHub streak" />
+      <br/>
+      <img src="https://github-readme-stats-abhinav.vercel.app/api/top-langs/?username=abhinav-phi&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=C77DFF&text_color=c9d1d9&langs_count=8" width="100%" alt="Top languages" />
+    </td>
+    <td width="42%" valign="middle">
+      <img src="abhinav-phi-gitfut.png" width="330" alt="GitFut card — Abhinav · 75 GOLD · Top 0.68% of GitHub" />
+    </td>
+  </tr>
+</table>
 
-<img src="https://skillicons.dev/icons?i=react,vite,tailwind,nodejs,fastapi,postgres" />
+</div>
 
-<img src="https://skillicons.dev/icons?i=docker,git,githubactions,vercel,mongodb,mysql" />
+## Tech Stack
 
-<br/>
+<div align="center">
 
-[![LeetCode](https://img.shields.io/badge/LeetCode-1600+-7B2CBF?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/)
-[![Codeforces](https://img.shields.io/badge/Codeforces-Specialist-5A189A?style=for-the-badge&logo=codeforces&logoColor=white)](https://codeforces.com/)
-[![CodeChef](https://img.shields.io/badge/CodeChef-2_Star-3C096C?style=for-the-badge&logo=codechef&logoColor=white)](https://www.codechef.com/)
-[![GeeksforGeeks](https://img.shields.io/badge/GFG-Profile-240046?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/)
+**Languages**
+
+<img src="https://skillicons.dev/icons?i=cpp,py,ts,js,go" />
+
+**Frontend**
+
+<img src="https://skillicons.dev/icons?i=react,nextjs,tailwind,css,html,vite,figma" />
+
+**Backend & Databases**
+
+<img src="https://skillicons.dev/icons?i=fastapi,nodejs,postgres,redis,mongodb" />
+
+**ML & DevOps**
+
+<img src="https://skillicons.dev/icons?i=pytorch,opencv,docker,git,githubactions,vercel" />
 
 <br/>
 
