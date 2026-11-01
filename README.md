@@ -60,12 +60,6 @@
 
 **How to read this.** *Contributions* = PRs merged + PRs open + issues opened, pulled live from the GitHub Search API on **2026-11-01**. Only organizations whose flagship repository has **5,000+ stars** are listed — smaller projects are left out. An empty cell means zero.
 
-### Own repositories
-
-| Account | Contributions | PRs merged | Issues | Repos |
-|:---|---:|---:|---:|---:|
-| [abhinav-phi](https://github.com/abhinav-phi) | **148** | 91 | 57 | 11 |
-
 ## Tech Stack
 
 <div align="center">
