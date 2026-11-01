@@ -1,0 +1,37 @@
+name: Generate stats cards
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/render-stats.mjs
+      - .github/workflows/stats.yml
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Render cards
+        run: node scripts/render-stats.mjs
+        env:
+          # Optional PAT (no scopes needed for public data, but it makes the token
+          # act as the profile owner so private commits are counted). Falls back to
+          # the built-in token, which reports public activity only.
+          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(stats): refresh analytics cards"
+          file_pattern: assets/*.svg
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
