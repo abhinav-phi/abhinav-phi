@@ -1,5 +1,9 @@
-// Renders the profile stat cards into assets/ using the GitHub API directly.
+// Renders the profile analytics panel into assets/ using the GitHub API directly.
 // Runs in CI with the workflow token, so no third-party stats host is involved.
+//
+// Everything in the top row is composed into ONE svg: GitHub's sanitizer drops the
+// style attribute from <table>/<td>, so an HTML table here would always draw cell
+// borders. A single vector panel sidesteps that entirely.
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -9,18 +13,28 @@ const TOKEN = process.env.GITHUB_TOKEN;
 if (!TOKEN) throw new Error("GITHUB_TOKEN is required");
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), "..", "assets");
+const CW = 560;
 const BG = "#0D1117";
 const TITLE = "#C77DFF";
 const ICON = "#9D4EDD";
 const TEXT = "#c9d1d9";
 const DIM = "#8b949e";
 const TRACK = "#1c2433";
-const PALETTE = ["#9D4EDD", "#C77DFF", "#7B2CBF", "#5A189A", "#E0AAFF", "#3C096C", "#B388EB", "#6A4C93"];
+const BORDER = "#240046";
+const PALETTE = ["#9D4EDD", "#C77DFF", "#7B2CBF", "#5A189A", "#E0AAFF", "#3C096C"];
 
 const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const num = (n) => n.toLocaleString("en-US");
-const pct = (n, d) => (d ? (n / d) * 100 : 0);
+
+const STYLE = `<style>
+.h{font:600 15px 'Segoe UI',Ubuntu,sans-serif;fill:${TITLE}}
+.l{font:600 11px 'Segoe UI',Ubuntu,sans-serif;fill:${DIM}}
+.v{font:700 16px 'Segoe UI',Ubuntu,sans-serif;fill:${TEXT}}
+.r{font:600 13px 'Segoe UI',Ubuntu,sans-serif;fill:${TEXT}}
+.m{font:400 11px 'Segoe UI',Ubuntu,sans-serif;fill:${DIM}}
+.f{font:400 10px 'Segoe UI',Ubuntu,sans-serif;fill:${DIM}}
+</style>`;
 
 async function gql(query) {
   const res = await fetch("https://api.github.com/graphql", {
@@ -50,6 +64,7 @@ async function ownedRepos() {
   const repos = [];
   for (let page = 1; page <= 5; page++) {
     const batch = await rest(`/users/${USER}/repos?per_page=100&page=${page}&type=owner`);
+    if (!batch.length) break;
     repos.push(...batch.filter((r) => !r.fork && !r.archived));
     if (batch.length < 100) break;
   }
@@ -57,88 +72,22 @@ async function ownedRepos() {
 }
 
 function icon(name, x, y) {
-  const open = `<g transform="translate(${x} ${y})" fill="none" stroke="${ICON}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">`;
+  const g = `<g transform="translate(${x} ${y})" fill="none" stroke="${ICON}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">`;
   const dot = (cx, cy, r) => `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${ICON}" stroke="none"/>`;
   const shapes = {
-    commits: `${open}<line x1="6" y1="8" x2="14" y2="8"/>${dot(4, 8, 2.6)}<circle cx="8" cy="8" r="3.4"/></g>`,
-    pr: `${open}<line x1="4" y1="5" x2="4" y2="11"/>${dot(4, 3.2, 1.9)}${dot(4, 12.8, 1.9)}<path d="M9 4.5H11a2 2 0 0 1 2 2v4.5"/><polyline points="10.4 10.4 13 13 15.6 10.4"/></g>`,
-    merged: `${open}<circle cx="8" cy="8" r="6.4"/><polyline points="5.2 8.2 7.2 10.2 10.9 6"/></g>`,
-    issue: `${open}<circle cx="8" cy="8" r="6.4"/><line x1="8" y1="4.8" x2="8" y2="8.6"/>${dot(8, 11.2, 0.9)}</g>`,
+    commits: `${g}<line x1="6" y1="8" x2="14" y2="8"/>${dot(4, 8, 2.6)}<circle cx="8" cy="8" r="3.4"/></g>`,
+    pr: `${g}<line x1="4" y1="5" x2="4" y2="11"/>${dot(4, 3.2, 1.9)}${dot(4, 12.8, 1.9)}<path d="M9 4.5H11a2 2 0 0 1 2 2v4.5"/><polyline points="10.4 10.4 13 13 15.6 10.4"/></g>`,
+    merged: `${g}<circle cx="8" cy="8" r="6.4"/><polyline points="5.2 8.2 7.2 10.2 10.9 6"/></g>`,
+    issue: `${g}<circle cx="8" cy="8" r="6.4"/><line x1="8" y1="4.8" x2="8" y2="8.6"/>${dot(8, 11.2, 0.9)}</g>`,
     star: `<g transform="translate(${x} ${y})" fill="${ICON}"><path d="M8 1.6 9.9 5.5l4.3.6-3.1 3 .7 4.2L8 11.3l-3.8 2 .7-4.2-3.1-3 4.3-.6Z"/></g>`,
-    user: `${open}<circle cx="8" cy="5.2" r="2.8"/><path d="M2.8 14.2a5.2 5.2 0 0 1 10.4 0"/></g>`,
-    repo: `${open}<path d="M3 2.6h9.4a.9.9 0 0 1 .9.9v10.2H4.4A1.4 1.4 0 0 1 3 12.3Z"/><line x1="5.6" y1="5.6" x2="10.6" y2="5.6"/><line x1="5.6" y1="8.2" x2="10.6" y2="8.2"/></g>`,
-    review: `${open}<rect x="2" y="2.8" width="12" height="9" rx="1.6"/><polyline points="5.4 11.8 5.4 14.4 8.4 11.8"/><line x1="4.8" y1="6" x2="11.2" y2="6"/><line x1="4.8" y1="8.8" x2="9" y2="8.8"/></g>`,
+    user: `${g}<circle cx="8" cy="5.2" r="2.8"/><path d="M2.8 14.2a5.2 5.2 0 0 1 10.4 0"/></g>`,
+    repo: `${g}<path d="M3 2.6h9.4a.9.9 0 0 1 .9.9v10.2H4.4A1.4 1.4 0 0 1 3 12.3Z"/><line x1="5.6" y1="5.6" x2="10.6" y2="5.6"/><line x1="5.6" y1="8.2" x2="10.6" y2="8.2"/></g>`,
+    review: `${g}<rect x="2" y="2.8" width="12" height="9" rx="1.6"/><polyline points="5.4 11.8 5.4 14.4 8.4 11.8"/><line x1="4.8" y1="6" x2="11.2" y2="6"/><line x1="4.8" y1="8.8" x2="9" y2="8.8"/></g>`,
   };
   return shapes[name] ?? "";
 }
 
-function card({ title, width, height, rows, footer }) {
-  const colGap = width / 2;
-  const body = rows
-    .map((r, i) => {
-      const col = i % 2;
-      const line = Math.floor(i / 2);
-      const x = 26 + col * colGap;
-      const y = 66 + line * 44;
-      return `<g>${icon(r.icon, x, y - 15)}<text x="${x + 26}" y="${y - 3}" class="l">${esc(r.label)}</text><text x="${x + 26}" y="${y + 16}" class="v">${esc(r.value)}</text></g>`;
-    })
-    .join("\n");
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(title)}">
-<style>
-.h{font:600 15px 'Segoe UI',Ubuntu,sans-serif;fill:${TITLE}}
-.l{font:600 11px 'Segoe UI',Ubuntu,sans-serif;fill:${DIM}}
-.v{font:700 16px 'Segoe UI',Ubuntu,sans-serif;fill:${TEXT}}
-.f{font:400 10px 'Segoe UI',Ubuntu,sans-serif;fill:${DIM}}
-</style>
-<rect width="100%" height="100%" rx="10" fill="${BG}"/>
-<rect x="1" y="1" width="${width - 2}" height="${height - 2}" rx="9" fill="none" stroke="#240046" stroke-width="1.5"/>
-<text x="26" y="34" class="h">${esc(title)}</text>
-${body}
-${footer ? `<text x="26" y="${height - 14}" class="f">${esc(footer)}</text>` : ""}
-</svg>`;
-}
-
-function langCard(title, langs, footer) {
-  const width = 600;
-  const rows = Math.ceil(langs.length / 2);
-  const height = 74 + rows * 30 + 26;
-  const total = langs.reduce((s, l) => s + l.bytes, 0);
-  const barW = width - 52;
-  let cursor = 0;
-  const segs = langs
-    .map((l, i) => {
-      const w = (l.bytes / total) * barW;
-      const seg = `<rect x="${(26 + cursor).toFixed(2)}" y="48" width="${w.toFixed(2)}" height="10" fill="${PALETTE[i % PALETTE.length]}"/>`;
-      cursor += w;
-      return seg;
-    })
-    .join("");
-  const legend = langs
-    .map((l, i) => {
-      const col = i % 2;
-      const line = Math.floor(i / 2);
-      const x = 26 + col * (width / 2);
-      const y = 86 + line * 30;
-      const share = pct(l.bytes, total).toFixed(1);
-      return `<g><circle cx="${x + 5}" cy="${y - 4}" r="5" fill="${PALETTE[i % PALETTE.length]}"/><text x="${x + 18}" y="${y}" class="l2">${esc(l.name)}</text><text x="${x + 18}" y="${y + 15}" class="v2">${share}%</text></g>`;
-    })
-    .join("\n");
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(title)}">
-<style>
-.h{font:600 15px 'Segoe UI',Ubuntu,sans-serif;fill:${TITLE}}
-.l2{font:600 11px 'Segoe UI',Ubuntu,sans-serif;fill:${DIM}}
-.v2{font:700 14px 'Segoe UI',Ubuntu,sans-serif;fill:${TEXT}}
-.f{font:400 10px 'Segoe UI',Ubuntu,sans-serif;fill:${DIM}}
-</style>
-<rect width="100%" height="100%" rx="10" fill="${BG}"/>
-<rect x="1" y="1" width="${width - 2}" height="${height - 2}" rx="9" fill="none" stroke="#240046" stroke-width="1.5"/>
-<text x="26" y="34" class="h">${esc(title)}</text>
-<rect x="26" y="48" width="${barW}" height="10" rx="5" fill="${TRACK}"/>
-${segs}
-${legend}
-${footer ? `<text x="26" y="${height - 12}" class="f">${esc(footer)}</text>` : ""}
-</svg>`;
-}
+// ---------- data ----------
 
 const since = new Date();
 since.setFullYear(since.getFullYear() - 1);
@@ -153,10 +102,11 @@ const [profile, collection, mergedPrs, openPrs, issues, repos] = await Promise.a
   ownedRepos(),
 ]);
 
-const commits = collection.user.contributionsCollection;
-const commitTotal = commits.totalCommitContributions + commits.restrictedContributionsCount;
-const reviews = commits.totalPullRequestReviewContributions;
+const cc = collection.user.contributionsCollection;
+const commitTotal = cc.totalCommitContributions + cc.restrictedContributionsCount;
+const reviews = cc.totalPullRequestReviewContributions;
 const starsEarned = repos.reduce((s, r) => s + r.stargazers_count, 0);
+const privateSeen = cc.restrictedContributionsCount > 0;
 
 const byteTotals = {};
 for (const r of repos) {
@@ -166,38 +116,111 @@ for (const r of repos) {
 const topLangs = Object.entries(byteTotals)
   .map(([name, bytes]) => ({ name, bytes }))
   .sort((a, b) => b.bytes - a.bytes)
-  .slice(0, 8);
+  .slice(0, 6);
+const langTotal = topLangs.reduce((s, l) => s + l.bytes, 0);
+
+const topRepos = [...repos]
+  .sort((a, b) => b.stargazers_count - a.stargazers_count || b.size - a.size)
+  .slice(0, 6);
 
 const stamp = new Date().toISOString().slice(0, 10);
-// restrictedContributionsCount is only populated when the token belongs to the
-// profile owner, so a plain GITHUB_TOKEN (Actions bot) reports public commits only.
-const privateNote = commits.restrictedContributionsCount > 0;
-const statsSvg = card({
-  title: `${profile.name || USER} · GitHub Stats`,
-  width: 600,
-  height: 242,
-  footer: `${privateNote ? "Public + private" : "Public"} activity · updated ${stamp}`,
-  rows: [
-    { icon: "commits", label: "COMMITS (12 MO)", value: num(commitTotal) },
-    { icon: "star", label: "STARS EARNED", value: num(starsEarned) },
-    { icon: "merged", label: "PRS MERGED", value: num(mergedPrs) },
-    { icon: "pr", label: "PRS IN PROGRESS", value: num(openPrs) },
-    { icon: "issue", label: "ISSUES OPENED", value: num(issues) },
-    { icon: "review", label: "PR REVIEWS (12 MO)", value: num(reviews) },
-    { icon: "user", label: "FOLLOWERS", value: num(profile.followers) },
-    { icon: "repo", label: "PUBLIC REPOS", value: num(repos.length) },
-  ],
-});
 
-const langSvg = langCard(
-  "Top Languages · own repositories",
-  topLangs,
-  `By bytes across ${repos.length} owned repositories · updated ${stamp}`
-);
+// ---------- sub-panels ----------
+
+const metrics = [
+  { icon: "commits", label: "COMMITS (12 MO)", value: num(commitTotal) },
+  { icon: "merged", label: "PULL REQUESTS MERGED", value: num(mergedPrs) },
+  { icon: "pr", label: "PULL REQUESTS IN PROGRESS", value: num(openPrs) },
+  { icon: "issue", label: "ISSUES OPENED", value: num(issues) },
+  { icon: "review", label: "PULL REQUEST REVIEWS (12 MO)", value: num(reviews) },
+  { icon: "star", label: "STARS EARNED", value: num(starsEarned) },
+  { icon: "repo", label: "OWNED REPOSITORIES", value: num(repos.length) },
+  { icon: "user", label: "FOLLOWERS", value: num(profile.followers) },
+];
+const statsH = 66 + metrics.length * 44 - 8 + 26;
+const statsBody =
+  metrics
+    .map((m, i) => {
+      const y = 66 + i * 44;
+      return `<g>${icon(m.icon, 26, y - 15)}<text x="52" y="${y - 3}" class="l">${esc(m.label)}</text><text x="52" y="${y + 16}" class="v">${esc(m.value)}</text></g>`;
+    })
+    .join("\n") +
+  `\n<text x="26" y="${statsH - 14}" class="f">${privateSeen ? "Public + private" : "Public"} activity · updated ${stamp}</text>`;
+
+const repoH = 62 + topRepos.length * 30 + 16;
+const repoBody =
+  topRepos
+    .map((r, i) => {
+      const y = 62 + i * 30;
+      return `<g><circle cx="30" cy="${y - 4}" r="4" fill="${PALETTE[i % PALETTE.length]}"/><text x="44" y="${y}" class="r">${esc(r.name)}</text><text x="${CW - 26}" y="${y}" text-anchor="end" class="m">${esc(r.language || "—")} · ★ ${r.stargazers_count}</text></g>`;
+    })
+    .join("\n") +
+  `\n<text x="26" y="${repoH - 10}" class="f">Own ${repos.length} non-fork repositories · updated ${stamp}</text>`;
+
+const langRows = Math.ceil(topLangs.length / 2);
+const langH = 74 + langRows * 30 + 14;
+const barW = CW - 52;
+let cursor = 0;
+const langBody =
+  `<rect x="26" y="48" width="${barW}" height="10" rx="5" fill="${TRACK}"/>` +
+  topLangs
+    .map((l, i) => {
+      const w = (l.bytes / langTotal) * barW;
+      const seg = `<rect x="${(26 + cursor).toFixed(2)}" y="48" width="${w.toFixed(2)}" height="10" fill="${PALETTE[i % PALETTE.length]}"/>`;
+      cursor += w;
+      return seg;
+    })
+    .join("") +
+  "\n" +
+  topLangs
+    .map((l, i) => {
+      const x = 26 + (i % 2) * (CW / 2);
+      const y = 86 + Math.floor(i / 2) * 30;
+      return `<g><circle cx="${x + 5}" cy="${y - 4}" r="5" fill="${PALETTE[i % PALETTE.length]}"/><text x="${x + 18}" y="${y}" class="l">${esc(l.name)}</text><text x="${x + 18}" y="${y + 15}" class="v">${((l.bytes / langTotal) * 100).toFixed(1)}%</text></g>`;
+    })
+    .join("\n") +
+  `\n<text x="26" y="${langH - 8}" class="f">Across ${repos.length} owned repositories · updated ${stamp}</text>`;
+
+// ---------- compose ----------
+
+const GAP = 24;
+const PW = CW * 2 + GAP;
+const rightH = repoH + GAP + langH;
+const PH = Math.max(statsH, rightH);
+
+const sub = (title, height, body, x, y) =>
+  `<g transform="translate(${x} ${y})">
+<rect width="${CW}" height="${height}" rx="10" fill="${BG}"/>
+<rect x="1" y="1" width="${CW - 2}" height="${height - 2}" rx="9" fill="none" stroke="${BORDER}" stroke-width="1.5"/>
+<text x="26" y="34" class="h">${esc(title)}</text>
+${body}
+</g>`;
+
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${PW}" height="${PH}" viewBox="0 0 ${PW} ${PH}" role="img" aria-label="GitHub analytics for ${esc(USER)}">
+${STYLE}
+${sub(`${profile.name || USER} · GitHub Stats`, statsH, statsBody, 0, 0)}
+${sub("Top Repositories · by stars", repoH, repoBody, CW + GAP, 0)}
+${sub("Top Languages · by bytes", langH, langBody, CW + GAP, repoH + GAP)}
+</svg>`;
 
 mkdirSync(OUT, { recursive: true });
-writeFileSync(join(OUT, "stats.svg"), statsSvg);
-writeFileSync(join(OUT, "languages.svg"), langSvg);
+writeFileSync(join(OUT, "analytics.svg"), svg);
 console.log(
-  JSON.stringify({ commitTotal, starsEarned, mergedPrs, openPrs, issues, reviews, followers: profile.followers, repos: repos.length, topLangs: topLangs.map((l) => `${l.name} ${pct(l.bytes, topLangs.reduce((s, x) => s + x.bytes, 0)).toFixed(1)}%`) }, null, 1)
+  JSON.stringify(
+    {
+      panel: `${PW}x${PH}`,
+      commitTotal,
+      mergedPrs,
+      openPrs,
+      issues,
+      reviews,
+      starsEarned,
+      followers: profile.followers,
+      repos: repos.length,
+      topRepos: topRepos.map((r) => `${r.name} ★${r.stargazers_count}`),
+      topLangs: topLangs.map((l) => `${l.name} ${((l.bytes / langTotal) * 100).toFixed(1)}%`),
+    },
+    null,
+    1
+  )
 );

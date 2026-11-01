@@ -19,20 +19,16 @@
 
 ## GitHub Analytics
 
-<table>
-  <tr>
-    <td width="62%" valign="top">
-      <img src="https://raw.githubusercontent.com/abhinav-phi/abhinav-phi/main/assets/stats.svg" width="100%" alt="GitHub stats — 1,679 commits, 165 PRs merged, 63 issues, 138 stars earned" />
-    </td>
-    <td width="38%" valign="middle" align="center">
-      <img src="abhinav-phi-gitfut.png" width="300" alt="GitFut card — Abhinav · 75 GOLD · Top 0.68% of GitHub" />
-    </td>
-  </tr>
-</table>
+<div align="center">
 
-<img src="https://raw.githubusercontent.com/abhinav-phi/abhinav-phi/main/assets/languages.svg" width="100%" alt="Top languages by bytes across owned repositories" />
+<img src="https://raw.githubusercontent.com/abhinav-phi/abhinav-phi/main/assets/analytics.svg" width="100%" alt="GitHub stats, top repositories and top languages" />
 
-> These two cards are rendered inside this repo by [`.github/workflows/stats.yml`](https://github.com/abhinav-phi/abhinav-phi/blob/main/.github/workflows/stats.yml) against the GitHub API and committed as SVG. No third-party stats host is involved, so they can't go down on a rate limit.
+<br/>
+<br/>
+
+[<img src="assets/swoc-season7-badge.png" width="364" alt="Social Winter of Code Season 7 contributor badge — Abhinav, @abhinav-phi" />](https://socialwinterofcode.com)<img src="abhinav-phi-gitfut.png" width="300" alt="GitFut card — Abhinav · 75 GOLD · Top 0.68% of GitHub" />
+
+</div>
 
 ## Open Source — Major Organizations
 
@@ -69,18 +65,6 @@
 | Account | Contributions | PRs merged | Issues | Repos |
 |:---|---:|---:|---:|---:|
 | [abhinav-phi](https://github.com/abhinav-phi) | **148** | 91 | 57 | 11 |
-
-30 owned repositories, 138 stars earned. This profile itself lives in [abhinav-phi/abhinav-phi](https://github.com/abhinav-phi/abhinav-phi) — the analytics cards, the snake and this table are all generated from it.
-
-## Programs & Recognition
-
-<div align="center">
-
-[![SWOC Season 7](https://img.shields.io/badge/Social_Winter_of_Code-Season_7_Contributor-7B2CBF?style=for-the-badge&logo=github&logoColor=white)](https://socialwinterofcode.com)
-
-<img src="assets/swoc-season7-badge.png" width="220" alt="Social Winter of Code Season 7 contributor badge — Abhinav, @abhinav-phi" />
-
-</div>
 
 ## Tech Stack
 
