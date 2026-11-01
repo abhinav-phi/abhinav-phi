@@ -1,10 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1144" height="460" viewBox="0 0 1144 460" role="img" aria-label="GitHub analytics for abhinav-phi">
+<svg xmlns="http://www.w3.org/2000/svg" width="1144" height="436" viewBox="0 0 1144 436" role="img" aria-label="GitHub analytics for abhinav-phi">
 <style>
 .h{font:600 15px 'Segoe UI',Ubuntu,sans-serif;fill:#C77DFF}
 .l{font:600 11px 'Segoe UI',Ubuntu,sans-serif;fill:#8b949e}
 .v{font:700 16px 'Segoe UI',Ubuntu,sans-serif;fill:#c9d1d9}
 .r{font:600 13px 'Segoe UI',Ubuntu,sans-serif;fill:#c9d1d9}
-.m{font:400 11px 'Segoe UI',Ubuntu,sans-serif;fill:#8b949e}
 .f{font:400 10px 'Segoe UI',Ubuntu,sans-serif;fill:#8b949e}
 </style>
 <g transform="translate(0 0)">
@@ -14,7 +13,7 @@
 <g><g transform="translate(26 51)" fill="none" stroke="#9D4EDD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="8" x2="14" y2="8"/><circle cx="4" cy="8" r="2.6" fill="#9D4EDD" stroke="none"/><circle cx="8" cy="8" r="3.4"/></g><text x="52" y="63" class="l">COMMITS (12 MO)</text><text x="52" y="82" class="v">1,680</text></g>
 <g><g transform="translate(26 95)" fill="none" stroke="#9D4EDD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.4"/><polyline points="5.2 8.2 7.2 10.2 10.9 6"/></g><text x="52" y="107" class="l">PULL REQUESTS MERGED</text><text x="52" y="126" class="v">165</text></g>
 <g><g transform="translate(26 139)" fill="none" stroke="#9D4EDD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="5" x2="4" y2="11"/><circle cx="4" cy="3.2" r="1.9" fill="#9D4EDD" stroke="none"/><circle cx="4" cy="12.8" r="1.9" fill="#9D4EDD" stroke="none"/><path d="M9 4.5H11a2 2 0 0 1 2 2v4.5"/><polyline points="10.4 10.4 13 13 15.6 10.4"/></g><text x="52" y="151" class="l">PULL REQUESTS IN PROGRESS</text><text x="52" y="170" class="v">42</text></g>
-<g><g transform="translate(26 183)" fill="none" stroke="#9D4EDD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.4"/><line x1="8" y1="4.8" x2="8" y2="8.6"/><circle cx="8" cy="11.2" r="0.9" fill="#9D4EDD" stroke="none"/></g><text x="52" y="195" class="l">ISSUES OPENED</text><text x="52" y="214" class="v">62</text></g>
+<g><g transform="translate(26 183)" fill="none" stroke="#9D4EDD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.4"/><line x1="8" y1="4.8" x2="8" y2="8.6"/><circle cx="8" cy="11.2" r="0.9" fill="#9D4EDD" stroke="none"/></g><text x="52" y="195" class="l">ISSUES OPENED</text><text x="52" y="214" class="v">63</text></g>
 <g><g transform="translate(26 227)" fill="none" stroke="#9D4EDD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2.8" width="12" height="9" rx="1.6"/><polyline points="5.4 11.8 5.4 14.4 8.4 11.8"/><line x1="4.8" y1="6" x2="11.2" y2="6"/><line x1="4.8" y1="8.8" x2="9" y2="8.8"/></g><text x="52" y="239" class="l">PULL REQUEST REVIEWS (12 MO)</text><text x="52" y="258" class="v">30</text></g>
 <g><g transform="translate(26 271)" fill="#9D4EDD"><path d="M8 1.6 9.9 5.5l4.3.6-3.1 3 .7 4.2L8 11.3l-3.8 2 .7-4.2-3.1-3 4.3-.6Z"/></g><text x="52" y="283" class="l">STARS EARNED</text><text x="52" y="302" class="v">138</text></g>
 <g><g transform="translate(26 315)" fill="none" stroke="#9D4EDD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2.6h9.4a.9.9 0 0 1 .9.9v10.2H4.4A1.4 1.4 0 0 1 3 12.3Z"/><line x1="5.6" y1="5.6" x2="10.6" y2="5.6"/><line x1="5.6" y1="8.2" x2="10.6" y2="8.2"/></g><text x="52" y="327" class="l">OWNED REPOSITORIES</text><text x="52" y="346" class="v">30</text></g>
@@ -22,28 +21,17 @@
 <text x="26" y="422" class="f">Public + private activity · updated 2026-11-01</text>
 </g>
 <g transform="translate(584 0)">
-<rect width="560" height="258" rx="10" fill="#0D1117"/>
-<rect x="1" y="1" width="558" height="256" rx="9" fill="none" stroke="#240046" stroke-width="1.5"/>
-<text x="26" y="34" class="h">Top Repositories · by stars</text>
-<g><circle cx="30" cy="58" r="4" fill="#9D4EDD"/><text x="44" y="62" class="r">to-undo-app</text><text x="534" y="62" text-anchor="end" class="m">TypeScript · ★ 7</text></g>
-<g><circle cx="30" cy="88" r="4" fill="#C77DFF"/><text x="44" y="92" class="r">portfolio</text><text x="534" y="92" text-anchor="end" class="m">HTML · ★ 6</text></g>
-<g><circle cx="30" cy="118" r="4" fill="#7B2CBF"/><text x="44" y="122" class="r">bookstore-api</text><text x="534" y="122" text-anchor="end" class="m">Go · ★ 6</text></g>
-<g><circle cx="30" cy="148" r="4" fill="#5A189A"/><text x="44" y="152" class="r">ayurdiet</text><text x="534" y="152" text-anchor="end" class="m">TypeScript · ★ 6</text></g>
-<g><circle cx="30" cy="178" r="4" fill="#E0AAFF"/><text x="44" y="182" class="r">Movies-CRUD-API</text><text x="534" y="182" text-anchor="end" class="m">Go · ★ 6</text></g>
-<g><circle cx="30" cy="208" r="4" fill="#3C096C"/><text x="44" y="212" class="r">abhinav-phi</text><text x="534" y="212" text-anchor="end" class="m">JavaScript · ★ 6</text></g>
-<text x="26" y="248" class="f">Own 30 non-fork repositories · updated 2026-11-01</text>
-</g>
-<g transform="translate(584 282)">
-<rect width="560" height="178" rx="10" fill="#0D1117"/>
-<rect x="1" y="1" width="558" height="176" rx="9" fill="none" stroke="#240046" stroke-width="1.5"/>
+<rect width="560" height="436" rx="10" fill="#0D1117"/>
+<rect x="1" y="1" width="558" height="434" rx="9" fill="none" stroke="#240046" stroke-width="1.5"/>
 <text x="26" y="34" class="h">Top Languages · by bytes</text>
-<rect x="26" y="48" width="508" height="10" rx="5" fill="#1c2433"/><rect x="26.00" y="48" width="217.45" height="10" fill="#9D4EDD"/><rect x="243.45" y="48" width="170.00" height="10" fill="#C77DFF"/><rect x="413.45" y="48" width="86.91" height="10" fill="#7B2CBF"/><rect x="500.36" y="48" width="15.59" height="10" fill="#5A189A"/><rect x="515.95" y="48" width="9.64" height="10" fill="#E0AAFF"/><rect x="525.59" y="48" width="8.41" height="10" fill="#3C096C"/>
-<g><circle cx="31" cy="82" r="5" fill="#9D4EDD"/><text x="44" y="86" class="l">TypeScript</text><text x="44" y="101" class="v">42.8%</text></g>
-<g><circle cx="311" cy="82" r="5" fill="#C77DFF"/><text x="324" y="86" class="l">Python</text><text x="324" y="101" class="v">33.5%</text></g>
-<g><circle cx="31" cy="112" r="5" fill="#7B2CBF"/><text x="44" y="116" class="l">Jupyter Notebook</text><text x="44" y="131" class="v">17.1%</text></g>
-<g><circle cx="311" cy="112" r="5" fill="#5A189A"/><text x="324" y="116" class="l">JavaScript</text><text x="324" y="131" class="v">3.1%</text></g>
-<g><circle cx="31" cy="142" r="5" fill="#E0AAFF"/><text x="44" y="146" class="l">PLpgSQL</text><text x="44" y="161" class="v">1.9%</text></g>
-<g><circle cx="311" cy="142" r="5" fill="#3C096C"/><text x="324" y="146" class="l">HTML</text><text x="324" y="161" class="v">1.7%</text></g>
-<text x="26" y="170" class="f">Across 30 owned repositories · updated 2026-11-01</text>
+<g><text x="26" y="66" class="r">TypeScript</text><text x="534" y="66" text-anchor="end" class="r">41.9%</text><rect x="26" y="74" width="508" height="8" rx="4" fill="#1c2433"/><rect x="26" y="74" width="212.79" height="8" rx="4" fill="#9D4EDD"/></g>
+<g><text x="26" y="107" class="r">Python</text><text x="534" y="107" text-anchor="end" class="r">32.7%</text><rect x="26" y="115" width="508" height="8" rx="4" fill="#1c2433"/><rect x="26" y="115" width="166.36" height="8" rx="4" fill="#C77DFF"/></g>
+<g><text x="26" y="149" class="r">Jupyter Notebook</text><text x="534" y="149" text-anchor="end" class="r">16.7%</text><rect x="26" y="157" width="508" height="8" rx="4" fill="#1c2433"/><rect x="26" y="157" width="85.05" height="8" rx="4" fill="#7B2CBF"/></g>
+<g><text x="26" y="190" class="r">JavaScript</text><text x="534" y="190" text-anchor="end" class="r">3.0%</text><rect x="26" y="198" width="508" height="8" rx="4" fill="#1c2433"/><rect x="26" y="198" width="15.25" height="8" rx="4" fill="#5A189A"/></g>
+<g><text x="26" y="231" class="r">PLpgSQL</text><text x="534" y="231" text-anchor="end" class="r">1.9%</text><rect x="26" y="239" width="508" height="8" rx="4" fill="#1c2433"/><rect x="26" y="239" width="9.43" height="8" rx="4" fill="#E0AAFF"/></g>
+<g><text x="26" y="272" class="r">HTML</text><text x="534" y="272" text-anchor="end" class="r">1.6%</text><rect x="26" y="280" width="508" height="8" rx="4" fill="#1c2433"/><rect x="26" y="280" width="8.23" height="8" rx="4" fill="#3C096C"/></g>
+<g><text x="26" y="314" class="r">CSS</text><text x="534" y="314" text-anchor="end" class="r">1.3%</text><rect x="26" y="322" width="508" height="8" rx="4" fill="#1c2433"/><rect x="26" y="322" width="6.82" height="8" rx="4" fill="#B388EB"/></g>
+<g><text x="26" y="355" class="r">Solidity</text><text x="534" y="355" text-anchor="end" class="r">0.8%</text><rect x="26" y="363" width="508" height="8" rx="4" fill="#1c2433"/><rect x="26" y="363" width="4.08" height="8" rx="4" fill="#6A4C93"/></g>
+<text x="26" y="422" class="f">Bytes across 30 owned repositories · updated 2026-11-01</text>
 </g>
 </svg>

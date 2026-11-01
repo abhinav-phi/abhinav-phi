@@ -1,8 +1,8 @@
 // Renders the profile analytics panel into assets/ using the GitHub API directly.
 // Runs in CI with the workflow token, so no third-party stats host is involved.
 //
-// Everything in the top row is composed into ONE svg: GitHub's sanitizer drops the
-// style attribute from <table>/<td>, so an HTML table here would always draw cell
+// Both cards are composed into ONE svg: GitHub's sanitizer drops the style
+// attribute from <table>/<td>, so an HTML table here would always draw cell
 // borders. A single vector panel sidesteps that entirely.
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -21,7 +21,7 @@ const TEXT = "#c9d1d9";
 const DIM = "#8b949e";
 const TRACK = "#1c2433";
 const BORDER = "#240046";
-const PALETTE = ["#9D4EDD", "#C77DFF", "#7B2CBF", "#5A189A", "#E0AAFF", "#3C096C"];
+const PALETTE = ["#9D4EDD", "#C77DFF", "#7B2CBF", "#5A189A", "#E0AAFF", "#3C096C", "#B388EB", "#6A4C93"];
 
 const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -32,7 +32,6 @@ const STYLE = `<style>
 .l{font:600 11px 'Segoe UI',Ubuntu,sans-serif;fill:${DIM}}
 .v{font:700 16px 'Segoe UI',Ubuntu,sans-serif;fill:${TEXT}}
 .r{font:600 13px 'Segoe UI',Ubuntu,sans-serif;fill:${TEXT}}
-.m{font:400 11px 'Segoe UI',Ubuntu,sans-serif;fill:${DIM}}
 .f{font:400 10px 'Segoe UI',Ubuntu,sans-serif;fill:${DIM}}
 </style>`;
 
@@ -116,16 +115,12 @@ for (const r of repos) {
 const topLangs = Object.entries(byteTotals)
   .map(([name, bytes]) => ({ name, bytes }))
   .sort((a, b) => b.bytes - a.bytes)
-  .slice(0, 6);
+  .slice(0, 8);
 const langTotal = topLangs.reduce((s, l) => s + l.bytes, 0);
-
-const topRepos = [...repos]
-  .sort((a, b) => b.stargazers_count - a.stargazers_count || b.size - a.size)
-  .slice(0, 6);
 
 const stamp = new Date().toISOString().slice(0, 10);
 
-// ---------- sub-panels ----------
+// ---------- stats panel ----------
 
 const metrics = [
   { icon: "commits", label: "COMMITS (12 MO)", value: num(commitTotal) },
@@ -137,70 +132,53 @@ const metrics = [
   { icon: "repo", label: "OWNED REPOSITORIES", value: num(repos.length) },
   { icon: "user", label: "FOLLOWERS", value: num(profile.followers) },
 ];
-const statsH = 66 + metrics.length * 44 - 8 + 26;
+
+const ROW = 44;
+const TOP = 66;
+const PH = TOP + metrics.length * ROW - 8 + 26;
+
 const statsBody =
   metrics
     .map((m, i) => {
-      const y = 66 + i * 44;
+      const y = TOP + i * ROW;
       return `<g>${icon(m.icon, 26, y - 15)}<text x="52" y="${y - 3}" class="l">${esc(m.label)}</text><text x="52" y="${y + 16}" class="v">${esc(m.value)}</text></g>`;
     })
     .join("\n") +
-  `\n<text x="26" y="${statsH - 14}" class="f">${privateSeen ? "Public + private" : "Public"} activity · updated ${stamp}</text>`;
+  `\n<text x="26" y="${PH - 14}" class="f">${privateSeen ? "Public + private" : "Public"} activity · updated ${stamp}</text>`;
 
-const repoH = 62 + topRepos.length * 30 + 16;
-const repoBody =
-  topRepos
-    .map((r, i) => {
-      const y = 62 + i * 30;
-      return `<g><circle cx="30" cy="${y - 4}" r="4" fill="${PALETTE[i % PALETTE.length]}"/><text x="44" y="${y}" class="r">${esc(r.name)}</text><text x="${CW - 26}" y="${y}" text-anchor="end" class="m">${esc(r.language || "—")} · ★ ${r.stargazers_count}</text></g>`;
-    })
-    .join("\n") +
-  `\n<text x="26" y="${repoH - 10}" class="f">Own ${repos.length} non-fork repositories · updated ${stamp}</text>`;
+// ---------- languages panel, same height as stats ----------
 
-const langRows = Math.ceil(topLangs.length / 2);
-const langH = 74 + langRows * 30 + 14;
 const barW = CW - 52;
-let cursor = 0;
+const langStep = (PH - 40 - TOP) / topLangs.length;
 const langBody =
-  `<rect x="26" y="48" width="${barW}" height="10" rx="5" fill="${TRACK}"/>` +
   topLangs
     .map((l, i) => {
-      const w = (l.bytes / langTotal) * barW;
-      const seg = `<rect x="${(26 + cursor).toFixed(2)}" y="48" width="${w.toFixed(2)}" height="10" fill="${PALETTE[i % PALETTE.length]}"/>`;
-      cursor += w;
-      return seg;
-    })
-    .join("") +
-  "\n" +
-  topLangs
-    .map((l, i) => {
-      const x = 26 + (i % 2) * (CW / 2);
-      const y = 86 + Math.floor(i / 2) * 30;
-      return `<g><circle cx="${x + 5}" cy="${y - 4}" r="5" fill="${PALETTE[i % PALETTE.length]}"/><text x="${x + 18}" y="${y}" class="l">${esc(l.name)}</text><text x="${x + 18}" y="${y + 15}" class="v">${((l.bytes / langTotal) * 100).toFixed(1)}%</text></g>`;
+      const y = TOP + Math.round(i * langStep);
+      const share = (l.bytes / langTotal) * 100;
+      const w = Math.max(2, (share / 100) * barW);
+      const color = PALETTE[i % PALETTE.length];
+      return `<g><text x="26" y="${y}" class="r">${esc(l.name)}</text><text x="${CW - 26}" y="${y}" text-anchor="end" class="r">${share.toFixed(1)}%</text><rect x="26" y="${y + 8}" width="${barW}" height="8" rx="4" fill="${TRACK}"/><rect x="26" y="${y + 8}" width="${w.toFixed(2)}" height="8" rx="4" fill="${color}"/></g>`;
     })
     .join("\n") +
-  `\n<text x="26" y="${langH - 8}" class="f">Across ${repos.length} owned repositories · updated ${stamp}</text>`;
+  `\n<text x="26" y="${PH - 14}" class="f">Bytes across ${repos.length} owned repositories · updated ${stamp}</text>`;
 
 // ---------- compose ----------
 
 const GAP = 24;
 const PW = CW * 2 + GAP;
-const rightH = repoH + GAP + langH;
-const PH = Math.max(statsH, rightH);
 
-const sub = (title, height, body, x, y) =>
-  `<g transform="translate(${x} ${y})">
-<rect width="${CW}" height="${height}" rx="10" fill="${BG}"/>
-<rect x="1" y="1" width="${CW - 2}" height="${height - 2}" rx="9" fill="none" stroke="${BORDER}" stroke-width="1.5"/>
+const sub = (title, body, x) =>
+  `<g transform="translate(${x} 0)">
+<rect width="${CW}" height="${PH}" rx="10" fill="${BG}"/>
+<rect x="1" y="1" width="${CW - 2}" height="${PH - 2}" rx="9" fill="none" stroke="${BORDER}" stroke-width="1.5"/>
 <text x="26" y="34" class="h">${esc(title)}</text>
 ${body}
 </g>`;
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${PW}" height="${PH}" viewBox="0 0 ${PW} ${PH}" role="img" aria-label="GitHub analytics for ${esc(USER)}">
 ${STYLE}
-${sub(`${profile.name || USER} · GitHub Stats`, statsH, statsBody, 0, 0)}
-${sub("Top Repositories · by stars", repoH, repoBody, CW + GAP, 0)}
-${sub("Top Languages · by bytes", langH, langBody, CW + GAP, repoH + GAP)}
+${sub(`${profile.name || USER} · GitHub Stats`, statsBody, 0)}
+${sub("Top Languages · by bytes", langBody, CW + GAP)}
 </svg>`;
 
 mkdirSync(OUT, { recursive: true });
@@ -217,7 +195,6 @@ console.log(
       starsEarned,
       followers: profile.followers,
       repos: repos.length,
-      topRepos: topRepos.map((r) => `${r.name} ★${r.stargazers_count}`),
       topLangs: topLangs.map((l) => `${l.name} ${((l.bytes / langTotal) * 100).toFixed(1)}%`),
     },
     null,
