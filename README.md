@@ -21,7 +21,7 @@
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/abhinav-phi/abhinav-phi/main/assets/analytics.svg" width="100%" alt="GitHub stats and top languages" />
+<img src="https://raw.githubusercontent.com/abhinav-phi/abhinav-phi/main/assets/analytics.svg" width="100%" alt="GitHub stats" />
 
 <br/>
 <br/>
